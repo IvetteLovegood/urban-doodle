@@ -124,15 +124,13 @@ export default (props: Props) => {
   const watchedEndTime = watch('endtime');
 
   useEffect(() => {
-    console.log(dayTimes)
-
-        for (const key in dayTimes) {
-      if (dayTimes.hasOwnProperty(key)) {
-          dayTimes[key].starttime = watchedStartTime;
-          dayTimes[key].endtime = watchedEndTime;
-      }
-  }
-    
+    for (const key in dayTimes) {
+        if (dayTimes.hasOwnProperty(key)) {
+            dayTimes[key].starttime = watchedStartTime;
+            dayTimes[key].endtime = watchedEndTime;
+        }
+    }
+    // Aquí puedes llamar a setDayTimes si es necesario
 }, [watchedStartTime, watchedEndTime]);
 
   const [multiTimeDefaults] = useState<TimeDefaultsType>(() => {
@@ -274,7 +272,7 @@ export default (props: Props) => {
               multiple
               inline
               defaultValue={job?.day_types.map((x) => x.dayid)}
-              defaultTimeValues={multiTimeDefaults}
+              defaultTimeValues={dayTimes}
               options={JobDays}
               onDayTimesChange={handleDayTimesChange}
               defaultStartTime={job?.starttime || "00:00:00"}
