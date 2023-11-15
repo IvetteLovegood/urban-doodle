@@ -88,7 +88,7 @@ export default ((props: MultiTimeSelect) => {
     },
     defaultValue !== undefined ? (multiple ? defaultValue : [defaultValue]) : []
   )
-  const [dayTimes, setDayTimes] = useState<DayTimes>(props.defaultTimeValues || {})
+  const [dayTimes, setDayTimes] = useState<DayTimes>(props.defaultTimeValues || {});
   const [dropdownShow, setDropdownShow] = useState(false)
   const [searchText, setSearchText] = useState("")
   const searchInput = useRef<any>()
@@ -120,6 +120,11 @@ export default ((props: MultiTimeSelect) => {
       return newDayTimes
     })
   }
+
+  useEffect(() => {
+    // Si props.defaultTimeValues es undefined, inicializa dayTimes con un objeto vacío
+    setDayTimes(props.defaultTimeValues || {});
+}, [props.defaultTimeValues]);
 
   useMountedEffect(() => {
     onChange?.(multiple ? values : values[0])
